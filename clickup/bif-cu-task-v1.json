@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/BIF-Big-Ideas-Foundry/bif-schemas/blob/main/clickup/bif-cu-task-v1.json",
+  
+  "_meta": {
+    "name": "BIF ClickUp Task Schema",
+    "version": "1.0.0",
+    "created": "2026-01-04",
+    "author": "Hui Newnham",
+    "contact": "hui@bif.llc",
+    "notes": "This is the canonical schema for BIF ClickUp task data used across all integrations. Contact Hui before adding or modifying any fields to ensure consistency across the BIF ecosystem.",
+    "changelog": [
+      {
+        "version": "1.0.0",
+        "date": "2026-01-04",
+        "author": "Hui Newnham",
+        "changes": "Initial schema creation"
+      }
+    ]
+  },
+
+  "_namespaces": {
+    "description": "Valid namespace prefixes for BID (BIF Primary Key). Format: [NAMESPACE][4-digit serial] e.g., BIF0042",
+    "registry": {
+      "BWO": {
+        "description": "BIF Work Order (internal operations)",
+        "clickup_task_type": "Job",
+        "example": "BWO1368"
+      },
+      "BIF": {
+        "description": "BIF Client Job (external/billable)",
+        "clickup_task_type": "Job",
+        "example": "BIF0042"
+      },
+      "PER": {
+        "description": "Person (HubSpot Contact Record)",
+        "clickup_task_type": "HubSpot",
+        "example": "PER0789"
+      },
+      "ANT": {
+        "description": "AutoNumber Test (development/testing)",
+        "clickup_task_type": "Job",
+        "example": "ANT0001"
+      }
+    }
+  },
+
+  "_field_mapping": {
+    "description": "Maps harmonized field names to ClickUp custom field IDs for use in integrations",
+    
+    "primary_identifiers": {
+      "bid": {
+        "clickup_field_id": "63eef2c4-4bf4-4f95-9714-0cd97808be91",
+        "clickup_field_name": "BID",
+        "type": "short_text",
+        "description": "BIF Primary Key - unique identifier across all BIF systems",
+        "format": "[NAMESPACE][4-digit serial]",
+        "example": "BIF0042"
+      },
+      "namespace": {
+        "clickup_field_id": "f9f7428e-59ad-42d3-9cea-bf4df29054c4",
+        "clickup_field_name": "Namespace",
+        "type": "short_text",
+        "description": "3-character code indicating record type",
+        "example": "BIF"
+      }
+    },
+
+    "job_metadata": {
+      "task_title": {
+        "clickup_field_id": "61f29897-57ab-426c-8700-26992bd7cb36",
+        "clickup_field_name": "Task Title",
+        "type": "short_text",
+        "description": "Clean job/task title for display"
+      },
+      "job_type": {
+        "clickup_field_id": "3d8a2618-39a8-4e41-b4d8-d1876b083e29",
+        "clickup_field_name": "Job Type",
+        "type": "drop_down",
+        "options": ["Social Post", "OTHER"]
+      },
+      "date_bucket": {
+        "clickup_field_id": "3a157154-d460-495c-b308-be3530f770f2",
+        "clickup_field_name": "YYYY-MM",
+        "type": "short_text",
+        "description": "Date bucket for filing/organization"
+      },
+      "date_promised": {
+        "clickup_field_id": "09f9a8f5-8f58-4717-9b45-e989a55d77df",
+        "clickup_field_name": "Date Promised",
+        "type": "date",
+        "description": "Delivery/due date"
+      }
+    },
+
+    "storage_links": {
+      "gdrive_url": {
+        "clickup_field_id": "65402df7-8367-483e-91c7-404b4d4b4ff4",
+        "clickup_field_name": "G Drive",
+        "type": "url",
+        "description": "Google Drive folder URL"
+      },
+      "sharepoint_url": {
+        "clickup_field_id": "c6bb3a2b-bdd7-48df-815e-f617c16ee373",
+        "clickup_field_name": "SharePoint",
+        "type": "url",
+        "description": "SharePoint folder URL"
+      },
+      "job_dashboard_url": {
+        "clickup_field_id": "4f191f72-cbf0-48b8-af00-ff4920e4f417",
+        "clickup_field_name": "Job Dashoard",
+        "type": "url",
+        "description": "Job dashboard URL (note: ClickUp field has typo)"
+      }
+    },
+
+    "gmail": {
+      "gmail_label_name": {
+        "clickup_field_id": "2b6cf9ea-a91f-4ea6-a126-aec6b740eb17",
+        "clickup_field_name": "Gmail Label",
+        "type": "short_text",
+        "description": "Gmail label name"
+      },
+      "gmail_label_id": {
+        "clickup_field_id": "48d7f158-306c-4450-8046-3aa149279756",
+        "clickup_field_name": "Gmail Label ID",
+        "type": "short_text",
+        "description": "Gmail internal label ID"
+      }
+    },
+
+    "github": {
+      "github_repo_url": {
+        "clickup_field_id": "71944fb3-b9d8-410e-bd54-1c54477ab955",
+        "clickup_field_name": "BIF GIT",
+        "type": "url",
+        "description": "GitHub repository URL"
+      },
+      "github_active": {
+        "clickup_field_id": "7f2d9c87-0a55-4de9-9210-1765791e3f50",
+        "clickup_field_name": "GIT Active",
+        "type": "checkbox",
+        "description": "Flag to create GitHub repository"
+      },
+      "github_admins": {
+        "clickup_field_id": "4f550d2d-6826-40d4-b8d5-9f70d39e061d",
+        "clickup_field_name": "GIT Admin",
+        "type": "users",
+        "description": "Users with admin access to repo"
+      },
+      "github_contributors": {
+        "clickup_field_id": "c3e06ae0-d5c3-4a69-930c-2bbeac1f3d6c",
+        "clickup_field_name": "GIT Contributors",
+        "type": "users",
+        "description": "Users with contributor access to repo"
+      },
+      "github_reviewers": {
+        "clickup_field_id": "04712860-4cad-448f-9c34-61fbbcda159a",
+        "clickup_field_name": "GIT Reviewers",
+        "type": "users",
+        "description": "Users with reviewer access to repo"
+      }
+    },
+
+    "hubspot": {
+      "hubspot_email": {
+        "clickup_field_id": "b927b6d9-57c1-4316-a7b1-42a06589b4aa",
+        "clickup_field_name": "HS Email",
+        "type": "email",
+        "description": "HubSpot contact email"
+      },
+      "hubspot_first_name": {
+        "clickup_field_id": "46f56a61-9c28-4dcd-852d-15b297af4e98",
+        "clickup_field_name": "HS First Name",
+        "type": "short_text"
+      },
+      "hubspot_last_name": {
+        "clickup_field_id": "49be4ba8-00a4-46b8-9f81-1c2e22cc263e",
+        "clickup_field_name": "HS Last Name",
+        "type": "short_text"
+      },
+      "hubspot_record_id": {
+        "clickup_field_id": "0e6e4745-178d-42e3-b7a2-b59e15f17f42",
+        "clickup_field_name": "HS Record ID",
+        "type": "number",
+        "description": "HubSpot contact record ID"
+      },
+      "hubspot_synced": {
+        "clickup_field_id": "5c780f44-56a1-4f2a-86dc-028348ad70c5",
+        "clickup_field_name": "HS Status",
+        "type": "checkbox",
+        "description": "HubSpot sync status flag"
+      },
+      "hubspot_lifecycle": {
+        "clickup_field_id": "c82f63b3-5172-4f46-89fe-b740af483799",
+        "clickup_field_name": "HS Lifecycle Stage Old",
+        "type": "drop_down",
+        "description": "Legacy lifecycle stage from HubSpot"
+      }
+    },
+
+    "workflow_control": {
+      "record_lock": {
+        "clickup_field_id": "f7fb0050-5c01-4d2b-866d-b652e8cce92c",
+        "clickup_field_name": "Record Lock",
+        "type": "short_text",
+        "description": "Concurrency control - workflow ID currently processing"
+      },
+      "error_flag": {
+        "clickup_field_id": "29bd9630-741a-46e7-8597-4131c08fd02c",
+        "clickup_field_name": "Zap Error",
+        "type": "checkbox",
+        "description": "Error occurred during workflow processing"
+      },
+      "error_message": {
+        "clickup_field_id": "0fdd2fed-2e98-431f-bdc8-940aca133563",
+        "clickup_field_name": "Zap Error Message",
+        "type": "text",
+        "description": "Error details from failed workflow"
+      }
+    },
+
+    "authoredup": {
+      "authoredup_id": {
+        "clickup_field_id": "a95803a4-4341-4f47-aa96-44ed8cd2642d",
+        "clickup_field_name": "Authored Up ID",
+        "type": "short_text",
+        "description": "AuthoredUp content ID"
+      },
+      "authoredup_url": {
+        "clickup_field_id": "884f4136-a800-4807-8537-8b1a9ad8dd0a",
+        "clickup_field_name": "AuthoredUp Link",
+        "type": "url",
+        "description": "AuthoredUp content URL"
+      }
+    }
+  },
+
+  "_validation_rules": {
+    "description": "Sanity check rules for workflow processing",
+    "required_for_processing": [
+      {
+        "field": "namespace",
+        "rule": "non_empty",
+        "message": "Namespace is required - must be 3-character code"
+      },
+      {
+        "field": "bid",
+        "rule": "empty",
+        "message": "BID must be empty before processing (prevents duplicate runs)"
+      }
+    ],
+    "conditional_rules": [
+      {
+        "when": "namespace == 'PER'",
+        "require": "hubspot_email",
+        "message": "HubSpot email required for PER namespace records"
+      }
+    ]
+  },
+
+  "_integration_targets": {
+    "description": "Systems that consume this schema",
+    "systems": [
+      "ClickUp",
+      "Pipedream",
+      "Zapier",
+      "GitHub",
+      "Google Drive",
+      "Gmail",
+      "HubSpot",
+      "SharePoint"
+    ]
+
+  }
+}
